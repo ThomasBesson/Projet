@@ -8,6 +8,14 @@ void visualiser_graphe(T_SOMMET* tab_sommets, int* k) {
   }
 }
 
+void visualiser_graphe2(T_SOMMET* tab_sommets, int* k) {
+  int i;
+  for (i=0; i<(*k); i++) {
+      printf("Indice : %d, Nom : %s, Coordonnées : (%lf, %lf)\n", i,
+      tab_sommets[i].nom, tab_sommets[i].x, tab_sommets[i].y);
+  }
+}
+
 /* Hachage du nom du sommet */
 unsigned int hachage(char* mot, int dim_tab_hach){
     int i = 0;

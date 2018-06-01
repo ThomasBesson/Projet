@@ -1,0 +1,23 @@
+8 12
+"Sommets du graphe"
+0 10 20 "A" "Nice ouest"
+1 20 -50 "B" "Grenoble nord"
+2 -25 12.3 "C" "Paris est"
+3 -126 253 "D" "Nord pas de calais"
+4 -25 54 "E" "Lille est"
+5 35 84 "F" "Ohio"
+6 380 -32 "G" "Amsterdam"
+7 55 15 "H" "Brest"
+"arc du graphe : départ arrivée valeur "
+0 1 5
+0 2 20
+0 3 40
+1 2 10
+2 3 10
+1 4 7
+1 5 20
+2 5 10
+4 5 10
+6 5 20
+4 7 40
+7 5 10

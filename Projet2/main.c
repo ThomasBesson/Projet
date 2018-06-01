@@ -8,7 +8,8 @@
 
 //#define nom_graphe "metroetu.csv"
 //#define nom_graphe "graphe1.txt"
-#define nom_graphe "/home/student/graphes_phelma/grapheNewYork.csv"
+#define nom_graphe "/home/student/graphes_phelma/graphe2.txt"
+//#define nom_graphe "/home/student/graphes_phelma/grapheNewYork.csv"
 
 int main(int argc, char* argv[]) {
 
@@ -31,6 +32,8 @@ int main(int argc, char* argv[]) {
     tab_hach = calloc(dimension_tab_hach,sizeof(*tab_hach));
 
     tab_sommets = lecture_graphe(nom_graphe, &x,dimension_tab_hach,tab_hach);
+    visualiser_graphe(tab_sommets, &x);
+    visualiser_graphe2(tab_sommets, &x);
 //    tab_sommets = lecture_graphe(argv[2], &x,dimension_tab_hach,tab_hach);
 
     numero_depart = demande_station_depart(tab_hach,dimension_tab_hach,tab_sommets,x);

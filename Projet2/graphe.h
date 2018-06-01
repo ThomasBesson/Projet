@@ -11,6 +11,7 @@
 
 /* Prototypes des fonctions de graphe */
 void visualiser_graphe(T_SOMMET* tab_sommets, int* k);
+void visualiser_graphe2(T_SOMMET* tab_sommets, int* k);
 void lecture_arc(FILE* fp, T_SOMMET* tab_sommets);
 T_SOMMET* lecture_graphe(char* nom_graphe, int* s, int dimension, Liste_hachage* tab_hach);
 void liberer_sommet(T_SOMMET* tab_sommets, int x);
