@@ -4,6 +4,9 @@
  *  Created on: 29 avr. 2018
  *      Author: student
  */
+
+/* Se placer dans ../Debug pour lancer le make */
+
 #include <time.h>
 #include <string.h>
 
@@ -25,8 +28,16 @@ SDL_Color couleurBlanche = {255, 255, 255};
 #define R 2
 #define SCREEN_WIDTH  800
 #define SCREEN_HEIGHT 600
-#define NOM_GRAPHE "graphe1.txt"
+/* Avec Eclipse */
+//#define NOM_GRAPHE "graphe1.txt"
 //#define NOM_GRAPHE "graphe2.txt"
+//#define NOM_POLICE "Vera"
+
+/* Sans Eclipse -> il faut redéfinir les chemins des fichiers utilisés */
+#define NOM_GRAPHE "/home/student/Projet2/my_sdl/graphe1.txt"
+#define NOM_POLICE "/home/student/Projet2/my_sdl/Vera"
+/* Faire de même dans fevent.c */
+
 #define DILATATION 300
 #define X0 400
 #define Y0 300
@@ -69,7 +80,7 @@ int main(int argc, char **argv)
 	//SDL_Delay(100);
 	ligneHorizontale(0, Y0, 800, couleurs[C_OCRE]);
 	ligneVerticale(X0, 0, 800, couleurs[C_OCRE]);
-	draw_text("Hello !", "Vera", 50, 0, 0, couleurNoire, couleurBlanche);
+	draw_text("Hello !", NOM_POLICE, 50, 0, 0, couleurNoire, couleurBlanche);
 	//SDL_Delay(100);
 
 	/*for (r=0; r<1X0000; r++) {
@@ -87,7 +98,7 @@ int main(int argc, char **argv)
 		y1 = -tab_sommets[i].y*DILATATION+Y0;
 		disque(x1, y1, R, couleurs[i+1]);
 
-		draw_text(str, "Vera", 10, x1-20, y1-13, couleurNoire, colors_sdl[i+1]);
+		draw_text(str, NOM_POLICE, 10, x1-20, y1-13, couleurNoire, colors_sdl[i+1]);
 		actualiser();
 		//SDL_Delay(100);
 

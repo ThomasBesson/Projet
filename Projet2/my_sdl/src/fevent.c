@@ -17,6 +17,12 @@ SDL_Color couleurNoire2 = {0, 0, 0};
 SDL_Color couleurBlanche2 = {255, 255, 255};
 Uint32 couleurs[NB_COULEURS];
 
+/* Avec Eclipse */
+//#define NOM_POLICE "Vera"
+
+/* Sans Eclipse */
+#define NOM_POLICE "/home/student/Projet2/my_sdl/Vera"
+
 ////void affichageClickDepart(int* xd, int* yd) {
 //	char strd[50] = "\0";
 //	char* debutd = "Coordonnees depart : xd =";
@@ -34,7 +40,7 @@ Uint32 couleurs[NB_COULEURS];
 //	rect.h=50;
 //	rect.w=650;
 //	SDL_FillRect(affichage, &rect, couleurs[C_ROUGE]);
-//	draw_text(strd, "Vera", 30, 10, 400, couleurNoire2, couleurBlanche2);
+//	draw_text(strd, NOM_POLICE, 30, 10, 400, couleurNoire2, couleurBlanche2);
 //}
 
 void affichageClickDepart(int xd, int yd, int i, char* nom) {
@@ -54,7 +60,7 @@ void affichageClickDepart(int xd, int yd, int i, char* nom) {
 	rect.h=45;
 	rect.w=560;
 	SDL_FillRect(affichage, &rect, couleurs[C_ROUGE]);
-	draw_text(strd, "Vera", 30, 10, 450, couleurNoire2, couleurBlanche2);
+	draw_text(strd, NOM_POLICE, 30, 10, 450, couleurNoire2, couleurBlanche2);
 }
 
 void affichageClickArrivee(int xa, int ya, int i, char* nom) {
@@ -74,7 +80,7 @@ void affichageClickArrivee(int xa, int ya, int i, char* nom) {
 	rect.h=45;
 	rect.w=560;
 	SDL_FillRect(affichage, &rect, couleurs[C_BLEU]);
-	draw_text(stra, "Vera", 30, 10, 500, couleurNoire2, couleurBlanche2);
+	draw_text(stra, NOM_POLICE, 30, 10, 500, couleurNoire2, couleurBlanche2);
 }
 
 void affichageClickDepartError(void) {
@@ -83,7 +89,7 @@ void affichageClickDepartError(void) {
 	rect.h=45;
 	rect.w=560;
 	SDL_FillRect(affichage, &rect, couleurs[C_ROUGE]);
-	draw_text("Aucun sommet trouve !", "Vera", 30, 10, 450, couleurNoire2, couleurBlanche2);
+	draw_text("Aucun sommet trouve !", NOM_POLICE, 30, 10, 450, couleurNoire2, couleurBlanche2);
 }
 
 void affichageClickArriveeError(void) {
@@ -92,7 +98,7 @@ void affichageClickArriveeError(void) {
 	rect.h=45;
 	rect.w=560;
 	SDL_FillRect(affichage, &rect, couleurs[C_BLEU]);
-	draw_text("Aucun sommet trouve !", "Vera", 30, 10, 500, couleurNoire2, couleurBlanche2);
+	draw_text("Aucun sommet trouve !", NOM_POLICE, 30, 10, 500, couleurNoire2, couleurBlanche2);
 }
 
 void affichageDijkstra(double temps) {
@@ -103,7 +109,7 @@ void affichageDijkstra(double temps) {
 	rect.h=45;
 	rect.w=560;
 	SDL_FillRect(affichage, &rect, couleurs[C_VERT]);
-	draw_text(str, "Vera", 30, 10, 550, couleurNoire2, couleurBlanche2);
+	draw_text(str, NOM_POLICE, 30, 10, 550, couleurNoire2, couleurBlanche2);
 }
 
 //void correspondance(int x, int y, int dilatation, double r, T_SOMMET* tab_sommets, int n) {
@@ -121,11 +127,11 @@ void affichageDijkstra(double temps) {
 //			//char nom[15] = tab_sommets[i].nom;
 ////			char str[5] = "\0";
 ////			sprintf(str,"%d",i);
-////			draw_text(str, "Vera", 50, 100, 100, couleurNoire2, couleurBlanche2);
-//			//draw_text(tab_sommets[i].nom, "Vera", 50, 100, 100, couleurNoire2, couleurBlanche2);
+////			draw_text(str, NOM_POLICE, 50, 100, 100, couleurNoire2, couleurBlanche2);
+//			//draw_text(tab_sommets[i].nom, NOM_POLICE, 50, 100, 100, couleurNoire2, couleurBlanche2);
 //			break;
 //		} else {
-//			draw_text("Inconnu", "Vera", 50, 100, 100, couleurNoire2, couleurBlanche2);
+//			draw_text("Inconnu", NOM_POLICE, 50, 100, 100, couleurNoire2, couleurBlanche2);
 //		}
 //	}
 //}
