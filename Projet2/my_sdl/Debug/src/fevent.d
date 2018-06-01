@@ -1,14 +1,15 @@
 src/fevent.o: ../src/fevent.c ../inc/fevent.h ../inc/struct.h \
- ../inc/ftext.h ../inc/finit.h ../inc/graphe.h ../inc/liste_arc.h \
- ../inc/liste.h ../inc/liste_hachage.h
+ ../inc/config.h ../inc/dijkstra.h ../inc/graphe.h ../inc/liste_arc.h \
+ ../inc/liste.h ../inc/liste_hachage.h ../inc/algo.h ../inc/pile.h \
+ ../inc/tas.h ../inc/ftext.h ../inc/finit.h
 
 ../inc/fevent.h:
 
 ../inc/struct.h:
 
-../inc/ftext.h:
+../inc/config.h:
 
-../inc/finit.h:
+../inc/dijkstra.h:
 
 ../inc/graphe.h:
 
@@ -17,3 +18,13 @@ src/fevent.o: ../src/fevent.c ../inc/fevent.h ../inc/struct.h \
 ../inc/liste.h:
 
 ../inc/liste_hachage.h:
+
+../inc/algo.h:
+
+../inc/pile.h:
+
+../inc/tas.h:
+
+../inc/ftext.h:
+
+../inc/finit.h:

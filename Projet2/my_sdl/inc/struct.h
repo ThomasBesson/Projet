@@ -1,6 +1,8 @@
 #ifndef _STRUCT
 #define _STRUCT
 
+#include <SDL/SDL.h>
+
 /* Structure d'arc contenant le sommet d'arrivee et le cout pour y parvenir */
 typedef struct {
     int arrivee;
@@ -19,5 +21,26 @@ typedef struct {
     double x,y;
     int tas;
   L_ARC voisins; } T_SOMMET;
+
+/* Structure d'événement pour l'interface graphique */
+typedef struct
+	{
+	char key[SDLK_LAST];
+	int mousex,mousey;
+	int mousexrel,mouseyrel;
+	char mousebuttons[8];
+	T_SOMMET* tab_som;
+	int n;
+	int indd;
+	int inda;
+	int d;
+	int a;
+	double xd;
+	double yd;
+	double xa;
+	double ya;
+	double dijkstra;
+	char quit;
+} Input;
 
 #endif

@@ -10,6 +10,10 @@
 #include "fevent.h"
 
 SDL_Surface* affichage;
+SDL_Rect rect;
+SDL_Color couleurNoire2 = {0, 0, 0};
+SDL_Color couleurBlanche2 = {255, 255, 255};
+Uint32 couleurs[NB_COULEURS];
 
 void draw_text(char* string, char* pfont, int size, int x, int y, SDL_Color foregroundColor, SDL_Color backgroundColor)
 {
@@ -51,8 +55,73 @@ void coordonnees(int x, int y)
 
 	SDL_WM_SetCaption(title, NULL);
 	actualiser();
+}
 
-	/*char test2[5]="test2";
-	SDL_WM_SetCaption(test2, NULL);
-		actualiser();*/
+void affichageClickDepart(int xd, int yd, int i, char* nom) {
+	char strd[50] = "\0";
+	char strind[5] = "\0";
+	sprintf(strind,"Depart : %d / ",i);
+	char strxd[5] = "\0";
+	sprintf(strxd," / (%d,",xd);
+	char stryd[5] = "\0";
+	sprintf(stryd,"%d)",yd);
+	strcat(strd, strind);
+	strcat(strd, nom);
+	strcat(strd, strxd);
+	strcat(strd, stryd);
+	rect.x=BOX_X;
+	rect.y=BOX_Y;
+	rect.h=BOX_H;
+	rect.w=BOX_W;
+	SDL_FillRect(affichage, &rect, couleurs[C_ROUGE]);
+	draw_text(strd, "Vera", POLICE, POLICE_X, POLICE_Y, couleurNoire2, couleurBlanche2);
+}
+
+void affichageClickArrivee(int xa, int ya, int i, char* nom) {
+	char stra[50] = "\0";
+	char strind[5] = "\0";
+	sprintf(strind,"Arrivee : %d / ",i);
+	char strxa[5] = "\0";
+	sprintf(strxa," / (%d,",xa);
+	char strya[5] = "\0";
+	sprintf(strya,"%d)",ya);
+	strcat(stra, strind);
+	strcat(stra, nom);
+	strcat(stra, strxa);
+	strcat(stra, strya);
+	rect.x=BOX_X;
+	rect.y=BOX_Y+DELTA_Y;
+	rect.h=BOX_H;
+	rect.w=BOX_W;
+	SDL_FillRect(affichage, &rect, couleurs[C_BLEU]);
+	draw_text(stra, "Vera", POLICE, POLICE_X, POLICE_Y+DELTA_Y, couleurNoire2, couleurBlanche2);
+}
+
+void affichageClickDepartError(void) {
+	rect.x=BOX_X;
+	rect.y=BOX_Y;
+	rect.h=BOX_H;
+	rect.w=BOX_W;
+	SDL_FillRect(affichage, &rect, couleurs[C_ROUGE]);
+	draw_text("Aucun sommet trouve !", "Vera", POLICE, POLICE_X, POLICE_Y, couleurNoire2, couleurBlanche2);
+}
+
+void affichageClickArriveeError(void) {
+	rect.x=BOX_X;
+	rect.y=BOX_Y+DELTA_Y;
+	rect.h=BOX_H;
+	rect.w=BOX_W;
+	SDL_FillRect(affichage, &rect, couleurs[C_BLEU]);
+	draw_text("Aucun sommet trouve !", "Vera", POLICE, POLICE_X, POLICE_Y+DELTA_Y, couleurNoire2, couleurBlanche2);
+}
+
+void affichageDijkstra(double temps) {
+	char str[50] = "\0";
+	sprintf(str,"Temps Dijkstra : %lf ", temps);
+	rect.x=BOX_X;
+	rect.y=BOX_Y+2*DELTA_Y;
+	rect.h=BOX_H;
+	rect.w=BOX_W;
+	SDL_FillRect(affichage, &rect, couleurs[C_VERT]);
+	draw_text(str, "Vera", POLICE, POLICE_X, POLICE_Y+2*DELTA_Y, couleurNoire2, couleurBlanche2);
 }

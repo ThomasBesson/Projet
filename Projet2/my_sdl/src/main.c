@@ -7,57 +7,37 @@
 
 /* Se placer dans ../Debug pour lancer le make */
 
-#include <time.h>
-#include <string.h>
-
+#include "config.h"
 #include "graphe.h"
 #include "dijkstra.h"
-
 #include "finit.h"
 #include "fevent.h"
 #include "ftext.h"
 #include "ffigure.h"
+#include <time.h>
+#include <string.h>
 
 SDL_Surface* affichage;
-Uint32 couleurs[NB_COULEURS];
-SDL_Color colors_sdl[NB_COULEURS];
+SDL_Rect rect;
 SDL_Color couleurNoire = {0, 0, 0};
 SDL_Color couleurBlanche = {255, 255, 255};
+Uint32 couleurs[NB_COULEURS];
+SDL_Color colors_sdl[NB_COULEURS];
 
-#define INF 10000
-#define R 2
-#define SCREEN_WIDTH  800
-#define SCREEN_HEIGHT 600
-/* Avec Eclipse */
-//#define NOM_GRAPHE "graphe1.txt"
-//#define NOM_GRAPHE "graphe2.txt"
-//#define NOM_POLICE "Vera"
-
-/* Sans Eclipse -> il faut redéfinir les chemins des fichiers utilisés */
-#define NOM_GRAPHE "/home/student/Projet2/my_sdl/graphe1.txt"
-#define NOM_POLICE "/home/student/Projet2/my_sdl/Vera"
-/* Faire de même dans fevent.c */
-
-#define DILATATION 300
-#define X0 400
-#define Y0 300
-
-int rand_a_b(int a, int b){
-
-    return rand()%(b-a) +a;
-
-}
+/* Pour test nombre de points */
+//int rand_a_b(int a, int b){
+//    return rand()%(b-a) +a;
+//}
 
 int main(int argc, char **argv)
 {
 	Input in;
-	int r;
 	int n; //nombre sommets
 	int i; //indice boucle
-	int x1,y1,x2,y2,xd,yd,xa,ya; //coordonnees
-	int xr, yr;
+	int x1,y1,x2,y2; //coordonnees
+	//int r, xr, yr; //test
 	int k;
-	double temps_dijkstra;
+	//double temps_dijkstra;
 //	attendreTouche();
 
     int dimension_tab_hach;
@@ -77,13 +57,15 @@ int main(int argc, char **argv)
     //attendreTouche();
 	//visualiser_graphe2(tab_sommets, &n);
 
-	//SDL_Delay(100);
-	ligneHorizontale(0, Y0, 800, couleurs[C_OCRE]);
-	ligneVerticale(X0, 0, 800, couleurs[C_OCRE]);
-	draw_text("Hello !", NOM_POLICE, 50, 0, 0, couleurNoire, couleurBlanche);
-	//SDL_Delay(100);
+	ligneHorizontale(0, Y0, SCREEN_WIDTH, couleurs[C_OCRE]);
+	ligneVerticale(X0, 0, SCREEN_HEIGHT, couleurs[C_OCRE]);
+	draw_text("A vous de jouer !", NOM_POLICE, POLICE, POLICE_X, 10, couleurNoire, couleurBlanche);
+	draw_text("Click gauche -> depart !", NOM_POLICE, POLICE, POLICE_X, 10+DELTA_Y, couleurNoire, couleurBlanche);
+	draw_text("Click droit -> arrivee !", NOM_POLICE, POLICE, POLICE_X, 10+2*DELTA_Y, couleurNoire, couleurBlanche);
+	draw_text("Regardez le terminal !", NOM_POLICE, POLICE, POLICE_X, 10+3*DELTA_Y, couleurNoire, couleurBlanche);
 
-	/*for (r=0; r<1X0000; r++) {
+	/* Test nombre de points */
+	/*for (r=0; r<10000; r++) {
 		xr = rand_a_b(-X0,X0)+X0;
 		yr = -rand_a_b(-Y0,Y0)+Y0;
 		setPixelVerif(xr, yr, couleurs[C_NOIR]);
@@ -98,7 +80,7 @@ int main(int argc, char **argv)
 		y1 = -tab_sommets[i].y*DILATATION+Y0;
 		disque(x1, y1, R, couleurs[i+1]);
 
-		draw_text(str, NOM_POLICE, 10, x1-20, y1-13, couleurNoire, colors_sdl[i+1]);
+		draw_text(str, NOM_POLICE, 20, x1-10, y1+5, couleurNoire, colors_sdl[i+1]);
 		actualiser();
 		//SDL_Delay(100);
 
@@ -115,52 +97,23 @@ int main(int argc, char **argv)
 		free(p);
 	}
 	actualiser();
-	/*attendreTouche();*/
-
-	/*char title[40];
-	int x = 0;
-	int y = 0;
-	char* debut = "Coordonnees : x = ";
-	char strx[5];
-	sprintf(strx,"%d",x);
-	char* milieu = " / y = ";
-	char stry[5];
-	sprintf(stry,"%d",x);
-	//strcpy(title, debut);
-	strcat(title, debut);
-	strcat(title, strx);
-	strcat(title, milieu);
-	strcat(title, stry);
-
-	SDL_WM_SetCaption(title, NULL);
-	actualiser();*/
 
 	char test[5]="test";
 	SDL_WM_SetCaption(test, NULL);
 	actualiser();
-	//SDL_Delay(100);
 
 	InitEvents(&in);
 	in.tab_som = tab_sommets;
 	in.n = n;
 	while(!in.quit)
 	{
-		UpdateEvents(&in,&xd, &yd, &xa, &ya);
-		if(in.d && in.a) {
-			temps_dijkstra = dijkstra(in.indd, in.inda, tab_sommets, n);
-			affichageDijkstra(temps_dijkstra);
-			in.d = 0;
-			in.a = 0;
-		}
-		/*while(!in.key[SDLK_ESCAPE])
-		{
-			UpdateEvents(&in);
-			coordonnees(in.mousex,in.mousey);
-
-			actualiser();
-			//SDL_Flip(screen);
-			SDL_Delay(5);
-		}*/
+		UpdateEvents(&in);
+//		if(in.d && in.a) {
+//			temps_dijkstra = dijkstra(in.indd, in.inda, tab_sommets, n);
+//			affichageDijkstra(temps_dijkstra);
+//			in.d = 0;
+//			in.a = 0;
+//		}
 		//attendreTouche();
 	}
 	liberer_sommet(tab_sommets,n);

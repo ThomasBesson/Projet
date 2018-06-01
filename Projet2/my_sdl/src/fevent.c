@@ -9,138 +9,22 @@
 #include "ftext.h"
 #include "finit.h"
 
-#include "graphe.h"
-
 SDL_Surface* affichage;
-SDL_Rect rect;
-SDL_Color couleurNoire2 = {0, 0, 0};
-SDL_Color couleurBlanche2 = {255, 255, 255};
-Uint32 couleurs[NB_COULEURS];
 
-/* Avec Eclipse */
-//#define NOM_POLICE "Vera"
-
-/* Sans Eclipse */
-#define NOM_POLICE "/home/student/Projet2/my_sdl/Vera"
-
-////void affichageClickDepart(int* xd, int* yd) {
-//	char strd[50] = "\0";
-//	char* debutd = "Coordonnees depart : xd =";
-//	char strxd[5] = "\0";
-//	sprintf(strxd,"%d",*xd);
-//	char* milieud = "/ yd = ";
-//	char stryd[5] = "\0";
-//	sprintf(stryd,"%d",*yd);
-//	strcat(strd, debutd);
-//	strcat(strd, strxd);
-//	strcat(strd, milieud);
-//	strcat(strd, stryd);
-//	rect.x=5;
-//	rect.y=395;
-//	rect.h=50;
-//	rect.w=650;
-//	SDL_FillRect(affichage, &rect, couleurs[C_ROUGE]);
-//	draw_text(strd, NOM_POLICE, 30, 10, 400, couleurNoire2, couleurBlanche2);
-//}
-
-void affichageClickDepart(int xd, int yd, int i, char* nom) {
-	char strd[50] = "\0";
-	char strind[5] = "\0";
-	sprintf(strind,"Depart : %d / ",i);
-	char strxd[5] = "\0";
-	sprintf(strxd," / (%d,",xd);
-	char stryd[5] = "\0";
-	sprintf(stryd,"%d)",yd);
-	strcat(strd, strind);
-	strcat(strd, nom);
-	strcat(strd, strxd);
-	strcat(strd, stryd);
-	rect.x=5;
-	rect.y=445;
-	rect.h=45;
-	rect.w=560;
-	SDL_FillRect(affichage, &rect, couleurs[C_ROUGE]);
-	draw_text(strd, NOM_POLICE, 30, 10, 450, couleurNoire2, couleurBlanche2);
+void testDijkstra(Input* in) {
+	if(in->d && in->a) {
+		in->dijkstra = dijkstra(in->indd, in->inda, in->tab_som, in->n);
+		affichageDijkstra(in->dijkstra);
+		in->d = 0;
+		in->a = 0;
+	}
 }
 
-void affichageClickArrivee(int xa, int ya, int i, char* nom) {
-	char stra[50] = "\0";
-	char strind[5] = "\0";
-	sprintf(strind,"Arrivee : %d / ",i);
-	char strxa[5] = "\0";
-	sprintf(strxa," / (%d,",xa);
-	char strya[5] = "\0";
-	sprintf(strya,"%d)",ya);
-	strcat(stra, strind);
-	strcat(stra, nom);
-	strcat(stra, strxa);
-	strcat(stra, strya);
-	rect.x=5;
-	rect.y=495;
-	rect.h=45;
-	rect.w=560;
-	SDL_FillRect(affichage, &rect, couleurs[C_BLEU]);
-	draw_text(stra, NOM_POLICE, 30, 10, 500, couleurNoire2, couleurBlanche2);
-}
-
-void affichageClickDepartError(void) {
-	rect.x=5;
-	rect.y=445;
-	rect.h=45;
-	rect.w=560;
-	SDL_FillRect(affichage, &rect, couleurs[C_ROUGE]);
-	draw_text("Aucun sommet trouve !", NOM_POLICE, 30, 10, 450, couleurNoire2, couleurBlanche2);
-}
-
-void affichageClickArriveeError(void) {
-	rect.x=5;
-	rect.y=495;
-	rect.h=45;
-	rect.w=560;
-	SDL_FillRect(affichage, &rect, couleurs[C_BLEU]);
-	draw_text("Aucun sommet trouve !", NOM_POLICE, 30, 10, 500, couleurNoire2, couleurBlanche2);
-}
-
-void affichageDijkstra(double temps) {
-	char str[50] = "\0";
-	sprintf(str,"Temps Dijkstra : %lf ", temps);
-	rect.x=5;
-	rect.y=545;
-	rect.h=45;
-	rect.w=560;
-	SDL_FillRect(affichage, &rect, couleurs[C_VERT]);
-	draw_text(str, NOM_POLICE, 30, 10, 550, couleurNoire2, couleurBlanche2);
-}
-
-//void correspondance(int x, int y, int dilatation, double r, T_SOMMET* tab_sommets, int n) {
-//	double xf, yf, xtab, ytab;
-//	int i;
-//	xf = (double)x/dilatation;
-//	yf = (double)y/dilatation;
-//	printf("xf : %lf, yf : %lf\n", xf, yf);
-//	for (i=0; i<n; i++) {
-//		xtab = tab_sommets[i].x;
-//		ytab = tab_sommets[i].y;
-//		//printf("xtab : %lf, ytab : %lf\n", xtab, ytab);
-//		printf("xtab+r : %lf, xtab-r : %lf, ytab+r : %lf, ytab-r : %lf\n", xtab+r, xtab-r, ytab+r, ytab-r);
-//		if (xf<=xtab+r && xf>=xtab-r && yf<=ytab+r && yf>=ytab-r) {
-//			//char nom[15] = tab_sommets[i].nom;
-////			char str[5] = "\0";
-////			sprintf(str,"%d",i);
-////			draw_text(str, NOM_POLICE, 50, 100, 100, couleurNoire2, couleurBlanche2);
-//			//draw_text(tab_sommets[i].nom, NOM_POLICE, 50, 100, 100, couleurNoire2, couleurBlanche2);
-//			break;
-//		} else {
-//			draw_text("Inconnu", NOM_POLICE, 50, 100, 100, couleurNoire2, couleurBlanche2);
-//		}
-//	}
-//}
-
-void correspondanceDepart(int x, int y, int dilatation, double r, Input* in) {
+void correspondanceDepart(int dilatation, double r, Input* in) {
 	double xf, yf, xtab, ytab;
 	int i;
-	xf = (double)x/dilatation;
-	yf = (double)y/dilatation;
+	xf = (double)in->xd/dilatation;
+	yf = (double)in->yd/dilatation;
 	//printf("xf : %lf, yf : %lf\n", xf, yf);
 	for (i=0; i<in->n; i++) {
 		xtab = in->tab_som[i].x;
@@ -149,9 +33,10 @@ void correspondanceDepart(int x, int y, int dilatation, double r, Input* in) {
 		//printf("xtab+r : %lf, xtab-r : %lf, ytab+r : %lf, ytab-r : %lf\n", xtab+r, xtab-r, ytab+r, ytab-r);
 		if (xf<=xtab+r && xf>=xtab-r && yf<=ytab+r && yf>=ytab-r) {
 			char* nom = in->tab_som[i].nom;
-			affichageClickDepart(x, y, i, nom);
+			affichageClickDepart(in->xd, in->yd, i, nom);
 			in->indd = i;
 			in->d = 1;
+			testDijkstra(in);
 			break;
 		} else {
 			affichageClickDepartError();
@@ -159,11 +44,11 @@ void correspondanceDepart(int x, int y, int dilatation, double r, Input* in) {
 	}
 }
 
-void correspondanceArrivee(int x, int y, int dilatation, double r, Input* in) {
+void correspondanceArrivee(int dilatation, double r, Input* in) {
 	double xf, yf, xtab, ytab;
 	int i;
-	xf = (double)x/dilatation;
-	yf = (double)y/dilatation;
+	xf = (double)in->xa/dilatation;
+	yf = (double)in->ya/dilatation;
 	//printf("xf : %lf, yf : %lf\n", xf, yf);
 	for (i=0; i<in->n; i++) {
 		xtab = in->tab_som[i].x;
@@ -172,9 +57,10 @@ void correspondanceArrivee(int x, int y, int dilatation, double r, Input* in) {
 		//printf("xtab+r : %lf, xtab-r : %lf, ytab+r : %lf, ytab-r : %lf\n", xtab+r, xtab-r, ytab+r, ytab-r);
 		if (xf<=xtab+r && xf>=xtab-r && yf<=ytab+r && yf>=ytab-r) {
 			char* nom = in->tab_som[i].nom;
-			affichageClickArrivee(x, y, i, nom);
+			affichageClickArrivee(in->xa, in->ya, i, nom);
 			in->inda = i;
 			in->a = 1;
+			testDijkstra(in);
 			break;
 		} else {
 			affichageClickArriveeError();
@@ -182,7 +68,7 @@ void correspondanceArrivee(int x, int y, int dilatation, double r, Input* in) {
 	}
 }
 
-void UpdateEvents(Input* in, int* xd, int* yd, int* xa, int* ya)
+void UpdateEvents(Input* in)
 {
 	SDL_Event event;
 	in->mousebuttons[SDL_BUTTON_WHEELUP] = 0;
@@ -211,8 +97,8 @@ void UpdateEvents(Input* in, int* xd, int* yd, int* xa, int* ya)
 			in->key[event.key.keysym.sym]=0;
 			break;*/
 		case SDL_MOUSEMOTION:
-			in->mousex=event.motion.x-400;
-			in->mousey=-event.motion.y+300;
+			in->mousex=event.motion.x-X0;
+			in->mousey=-event.motion.y+Y0;
 			in->mousexrel=event.motion.xrel;
 			in->mouseyrel=event.motion.yrel;
 			coordonnees(in->mousex,in->mousey);
@@ -225,16 +111,16 @@ void UpdateEvents(Input* in, int* xd, int* yd, int* xa, int* ya)
 		case SDL_MOUSEBUTTONUP:
 			switch (event.button.button) {
 				case SDL_BUTTON_LEFT:
-					*xd = event.motion.x-400;
-					*yd = -event.motion.y+300;
-					correspondanceDepart(*xd, *yd, 300, 0.03, in);
+					in->xd = event.motion.x-X0;
+					in->yd = -event.motion.y+Y0;
+					correspondanceDepart(DILATATION, DELTA, in);
 					//affichageClickDepart(xd, yd);
 					actualiser();
 					break;
 				case SDL_BUTTON_RIGHT:
-					*xa = event.motion.x-400;
-					*ya = -event.motion.y+300;
-					correspondanceArrivee(*xa, *ya, 300, 0.03, in);
+					in->xa = event.motion.x-X0;
+					in->ya = -event.motion.y+Y0;
+					correspondanceArrivee(DILATATION, DELTA, in);
 					//affichageClickArrivee(xa, ya);
 					actualiser();
 					break;
