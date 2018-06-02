@@ -5,7 +5,9 @@
  *      Author: student
  */
 
-/* Se placer dans ../Debug pour lancer le make */
+/* Se placer dans .../my_sdl/Debug pour lancer le make */
+/* Modifier le fichier config.h en fonction de votre configuration */
+/* Interface ne fonctionnant que sur des graphes courts comme graphe1.txt et graphe2.txt */
 
 #include "config.h"
 #include "graphe.h"
@@ -24,39 +26,33 @@ SDL_Color couleurBlanche = {255, 255, 255};
 Uint32 couleurs[NB_COULEURS];
 SDL_Color colors_sdl[NB_COULEURS];
 
-/* Pour test nombre de points */
-//int rand_a_b(int a, int b){
-//    return rand()%(b-a) +a;
-//}
-
 int main(int argc, char **argv)
 {
-	Input in;
+	/* Initialisation des parametres */
+	Input in; //structure d'evenements
 	int n; //nombre sommets
 	int i; //indice boucle
 	int x1,y1,x2,y2; //coordonnees
-	//int r, xr, yr; //test
-	int k;
-	//double temps_dijkstra;
-//	attendreTouche();
+	int k; // indice boucle
 
     int dimension_tab_hach;
-	T_SOMMET* tab_sommets = NULL; //tableau sommets
+	T_SOMMET* tab_sommets = NULL;
     Liste_hachage* tab_hach = NULL;
 
     dimension_tab_hach = dimension_tab_hachage();
     tab_hach = calloc(dimension_tab_hach, sizeof(*tab_hach));
 
+    /* Creation et recuperation du tableau de sommets */
     tab_sommets = lecture_graphe(NOM_GRAPHE, &n, dimension_tab_hach, tab_hach);
 
+    /* Initialisation des parametres lies a SDL */
 	initSDL();
 	init_ttf();
 	initCouleurs();
 	effacerEcran();
 	actualiser();
-    //attendreTouche();
-	//visualiser_graphe2(tab_sommets, &n);
 
+	/* Creation de l'interface graphique */
 	ligneHorizontale(0, Y0, SCREEN_WIDTH, couleurs[C_OCRE]);
 	ligneVerticale(X0, 0, SCREEN_HEIGHT, couleurs[C_OCRE]);
 	draw_text("A vous de jouer !", NOM_POLICE, POLICE, POLICE_X, 10, couleurNoire, couleurBlanche);
@@ -64,14 +60,7 @@ int main(int argc, char **argv)
 	draw_text("Click droit -> arrivee !", NOM_POLICE, POLICE, POLICE_X, 10+2*DELTA_Y, couleurNoire, couleurBlanche);
 	draw_text("Regardez le terminal !", NOM_POLICE, POLICE, POLICE_X, 10+3*DELTA_Y, couleurNoire, couleurBlanche);
 
-	/* Test nombre de points */
-	/*for (r=0; r<10000; r++) {
-		xr = rand_a_b(-X0,X0)+X0;
-		yr = -rand_a_b(-Y0,Y0)+Y0;
-		setPixelVerif(xr, yr, couleurs[C_NOIR]);
-	}*/
-
-	//attendreTouche();
+	/* Affichage des sommets et des arcs */
 	for (i=0; i<n; i++) {
 		char str[10] = "";
 		sprintf(str, "%d", i);
@@ -82,7 +71,6 @@ int main(int argc, char **argv)
 
 		draw_text(str, NOM_POLICE, 20, x1-10, y1+5, couleurNoire, colors_sdl[i+1]);
 		actualiser();
-		//SDL_Delay(100);
 
 		L_ARC p = tab_sommets[i].voisins;
 		while (!est_vide_arc(p)) {
@@ -91,31 +79,24 @@ int main(int argc, char **argv)
 			y2 = -tab_sommets[k].y*DILATATION+Y0;
 			ligne(x1, y1, x2, y2, couleurs[C_BLEU_FONCE]);
 			actualiser();
-			//SDL_Delay(100);
 			p = p->suiv;
 		}
 		free(p);
 	}
 	actualiser();
 
-	char test[5]="test";
-	SDL_WM_SetCaption(test, NULL);
-	actualiser();
-
+	/* Initialisation de la structure d'evenements */
 	InitEvents(&in);
 	in.tab_som = tab_sommets;
 	in.n = n;
+
+	/*  Boucle d'evenements */
 	while(!in.quit)
 	{
 		UpdateEvents(&in);
-//		if(in.d && in.a) {
-//			temps_dijkstra = dijkstra(in.indd, in.inda, tab_sommets, n);
-//			affichageDijkstra(temps_dijkstra);
-//			in.d = 0;
-//			in.a = 0;
-//		}
-		//attendreTouche();
 	}
+
+	/* Liberation */
 	liberer_sommet(tab_sommets,n);
 	liberer_tab_hachage(tab_hach, dimension_tab_hach);
 	return 0;

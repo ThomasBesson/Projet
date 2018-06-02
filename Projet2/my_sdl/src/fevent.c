@@ -25,12 +25,9 @@ void correspondanceDepart(int dilatation, double r, Input* in) {
 	int i;
 	xf = (double)in->xd/dilatation;
 	yf = (double)in->yd/dilatation;
-	//printf("xf : %lf, yf : %lf\n", xf, yf);
 	for (i=0; i<in->n; i++) {
 		xtab = in->tab_som[i].x;
 		ytab = in->tab_som[i].y;
-		//printf("xtab : %lf, ytab : %lf\n", xtab, ytab);
-		//printf("xtab+r : %lf, xtab-r : %lf, ytab+r : %lf, ytab-r : %lf\n", xtab+r, xtab-r, ytab+r, ytab-r);
 		if (xf<=xtab+r && xf>=xtab-r && yf<=ytab+r && yf>=ytab-r) {
 			char* nom = in->tab_som[i].nom;
 			affichageClickDepart(in->xd, in->yd, i, nom);
@@ -49,12 +46,9 @@ void correspondanceArrivee(int dilatation, double r, Input* in) {
 	int i;
 	xf = (double)in->xa/dilatation;
 	yf = (double)in->ya/dilatation;
-	//printf("xf : %lf, yf : %lf\n", xf, yf);
 	for (i=0; i<in->n; i++) {
 		xtab = in->tab_som[i].x;
 		ytab = in->tab_som[i].y;
-		//printf("xtab : %lf, ytab : %lf\n", xtab, ytab);
-		//printf("xtab+r : %lf, xtab-r : %lf, ytab+r : %lf, ytab-r : %lf\n", xtab+r, xtab-r, ytab+r, ytab-r);
 		if (xf<=xtab+r && xf>=xtab-r && yf<=ytab+r && yf>=ytab-r) {
 			char* nom = in->tab_som[i].nom;
 			affichageClickArrivee(in->xa, in->ya, i, nom);
@@ -91,18 +85,12 @@ void UpdateEvents(Input* in)
 					break;
 			}
 			break;
-			/*in->key[event.key.keysym.sym]=1;
-			break;*/
-		/*case SDL_KEYUP:
-			in->key[event.key.keysym.sym]=0;
-			break;*/
 		case SDL_MOUSEMOTION:
 			in->mousex=event.motion.x-X0;
 			in->mousey=-event.motion.y+Y0;
 			in->mousexrel=event.motion.xrel;
 			in->mouseyrel=event.motion.yrel;
 			coordonnees(in->mousex,in->mousey);
-			//actualiser();
 			SDL_Delay(5);
 			break;
 		case SDL_MOUSEBUTTONDOWN:
@@ -114,24 +102,18 @@ void UpdateEvents(Input* in)
 					in->xd = event.motion.x-X0;
 					in->yd = -event.motion.y+Y0;
 					correspondanceDepart(DILATATION, DELTA, in);
-					//affichageClickDepart(xd, yd);
 					actualiser();
 					break;
 				case SDL_BUTTON_RIGHT:
 					in->xa = event.motion.x-X0;
 					in->ya = -event.motion.y+Y0;
 					correspondanceArrivee(DILATATION, DELTA, in);
-					//affichageClickArrivee(xa, ya);
 					actualiser();
 					break;
 				default:
 					break;
 			}
 			break;
-			/*if (event.button.button == SDL_BUTTON_LEFT)
-			if (event.button.button!=SDL_BUTTON_WHEELUP && event.button.button!=SDL_BUTTON_WHEELDOWN)
-				in->mousebuttons[event.button.button]=0;
-			break;*/
 		default:
 			break;
 		}
@@ -139,13 +121,11 @@ void UpdateEvents(Input* in)
 }
 
 void InitEvents(Input* in)
-
 {
 	memset(in,0,sizeof(Input));
 }
 
 void attendreTouche(void)
-
 {
   SDL_Event event;
 

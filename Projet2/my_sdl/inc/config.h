@@ -8,15 +8,17 @@
 #ifndef INC_CONFIG_H_
 #define INC_CONFIG_H_
 
+/* Sans Eclipse */
+//#define NOM_GRAPHE "../graphe1.txt"
+//#define NOM_GRAPHE "../graphe2.txt"
+//#define NOM_POLICE "../Vera"
+
 /* Avec Eclipse */
 //#define NOM_GRAPHE "graphe1.txt"
 #define NOM_GRAPHE "graphe2.txt"
 #define NOM_POLICE "Vera"
 
-/* Sans Eclipse -> il faut redéfinir les chemins des fichiers utilisés */
-//#define NOM_GRAPHE "/home/student/Projet2/my_sdl/graphe1.txt"
-//#define NOM_POLICE "/home/student/Projet2/my_sdl/Vera"
-
+/* Definitions des parametres globaux */
 #define INF 0xFFFFFFF
 #define R 2
 #define SCREEN_WIDTH 800
@@ -24,7 +26,7 @@
 #define DILATATION 300
 #define X0 SCREEN_WIDTH/2
 #define Y0 SCREEN_HEIGHT/2
-#define DELTA 0.3
+#define DELTA 0.05
 #define BOX_X 5
 #define BOX_H 45
 #define BOX_W 560

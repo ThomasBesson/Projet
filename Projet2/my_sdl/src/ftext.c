@@ -74,7 +74,7 @@ void affichageClickDepart(int xd, int yd, int i, char* nom) {
 	rect.h=BOX_H;
 	rect.w=BOX_W;
 	SDL_FillRect(affichage, &rect, couleurs[C_ROUGE]);
-	draw_text(strd, "Vera", POLICE, POLICE_X, POLICE_Y, couleurNoire2, couleurBlanche2);
+	draw_text(strd, NOM_POLICE, POLICE, POLICE_X, POLICE_Y, couleurNoire2, couleurBlanche2);
 }
 
 void affichageClickArrivee(int xa, int ya, int i, char* nom) {
@@ -94,7 +94,7 @@ void affichageClickArrivee(int xa, int ya, int i, char* nom) {
 	rect.h=BOX_H;
 	rect.w=BOX_W;
 	SDL_FillRect(affichage, &rect, couleurs[C_BLEU]);
-	draw_text(stra, "Vera", POLICE, POLICE_X, POLICE_Y+DELTA_Y, couleurNoire2, couleurBlanche2);
+	draw_text(stra, NOM_POLICE, POLICE, POLICE_X, POLICE_Y+DELTA_Y, couleurNoire2, couleurBlanche2);
 }
 
 void affichageClickDepartError(void) {
@@ -103,7 +103,7 @@ void affichageClickDepartError(void) {
 	rect.h=BOX_H;
 	rect.w=BOX_W;
 	SDL_FillRect(affichage, &rect, couleurs[C_ROUGE]);
-	draw_text("Aucun sommet trouve !", "Vera", POLICE, POLICE_X, POLICE_Y, couleurNoire2, couleurBlanche2);
+	draw_text("Aucun sommet trouve !", NOM_POLICE, POLICE, POLICE_X, POLICE_Y, couleurNoire2, couleurBlanche2);
 }
 
 void affichageClickArriveeError(void) {
@@ -112,7 +112,7 @@ void affichageClickArriveeError(void) {
 	rect.h=BOX_H;
 	rect.w=BOX_W;
 	SDL_FillRect(affichage, &rect, couleurs[C_BLEU]);
-	draw_text("Aucun sommet trouve !", "Vera", POLICE, POLICE_X, POLICE_Y+DELTA_Y, couleurNoire2, couleurBlanche2);
+	draw_text("Aucun sommet trouve !", NOM_POLICE, POLICE, POLICE_X, POLICE_Y+DELTA_Y, couleurNoire2, couleurBlanche2);
 }
 
 void affichageDijkstra(double temps) {
@@ -123,5 +123,5 @@ void affichageDijkstra(double temps) {
 	rect.h=BOX_H;
 	rect.w=BOX_W;
 	SDL_FillRect(affichage, &rect, couleurs[C_VERT]);
-	draw_text(str, "Vera", POLICE, POLICE_X, POLICE_Y+2*DELTA_Y, couleurNoire2, couleurBlanche2);
+	draw_text(str, NOM_POLICE, POLICE, POLICE_X, POLICE_Y+2*DELTA_Y, couleurNoire2, couleurBlanche2);
 }

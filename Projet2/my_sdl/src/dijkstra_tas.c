@@ -83,8 +83,6 @@ double dijstra_tas(int numero_depart, int numero_arrivee,T_SOMMET*tab_sommets,in
         printf("Cout : %lf\n\n", pcc[tab_sommets[numero_arrivee].tas]);
     }
 
-
-
     /*liberation*/
     liberer_basique(S);
     free(C);
