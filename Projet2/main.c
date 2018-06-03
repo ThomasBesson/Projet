@@ -1,22 +1,16 @@
-//#include <stdio.h>
-//#include <stdlib.h>
-#include "graphe.h"
+#include "graphes.h"
 #include "algo.h"
 #include "liste_hachage.h"
 #include "dijkstra.h"
 #include "dijkstra_tas.h"
 
-//#define nom_graphe "metroetu.csv"
-//#define nom_graphe "graphe1.txt"
-#define nom_graphe "/home/student/graphes_phelma/graphe2.txt"
-//#define nom_graphe "/home/student/graphes_phelma/grapheNewYork.csv"
+//#define nom_graphe "graphe2.txt"
 
 int main(int argc, char* argv[]) {
 
     argc=2;
 
     /*initialisation variables*/
-    //    int depart,arrivee; //numero sommets depart et arrivee
     int numero_depart=-1;
     int numero_arrivee=-1;
     int dimension_tab_hach;
@@ -31,10 +25,10 @@ int main(int argc, char* argv[]) {
     dimension_tab_hach = dimension_tab_hachage();
     tab_hach = calloc(dimension_tab_hach,sizeof(*tab_hach));
 
-    tab_sommets = lecture_graphe(nom_graphe, &x,dimension_tab_hach,tab_hach);
-    visualiser_graphe(tab_sommets, &x);
-    visualiser_graphe2(tab_sommets, &x);
-//    tab_sommets = lecture_graphe(argv[2], &x,dimension_tab_hach,tab_hach);
+    //tab_sommets = lecture_graphe(nom_graphe, &x,dimension_tab_hach,tab_hach);
+    //visualiser_graphe(tab_sommets, &x);
+    //visualiser_graphe2(tab_sommets, &x);
+    tab_sommets = lecture_graphe(argv[1], &x,dimension_tab_hach,tab_hach);
 
     numero_depart = demande_station_depart(tab_hach,dimension_tab_hach,tab_sommets,x);
     numero_arrivee = demande_station_arrivee(tab_hach,dimension_tab_hach,tab_sommets,x);
@@ -49,5 +43,4 @@ int main(int argc, char* argv[]) {
     /*liberation*/
     liberer_sommet(tab_sommets, x);
     liberer_tab_hachage(tab_hach, dimension_tab_hach);
-    //liberer_hachage(tab_hach);
 }

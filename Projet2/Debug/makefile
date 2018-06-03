@@ -23,10 +23,10 @@ endif
 # Add inputs and outputs from these tool invocations to the build variables
 
 # All Target
-all: my_sdl
+all: main
 
 # Tool invocations
-my_sdl: $(OBJS) $(USER_OBJS)
+main: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: GCC C Linker'
 	gcc  -o "my_sdl" $(OBJS) $(USER_OBJS) $(LIBS)
@@ -35,7 +35,7 @@ my_sdl: $(OBJS) $(USER_OBJS)
 
 # Other Targets
 clean:
-	-$(RM) $(EXECUTABLES)$(OBJS)$(C_DEPS) my_sdl
+	-$(RM) $(EXECUTABLES)$(OBJS)$(C_DEPS) Projet2
 	-@echo ' '
 
 .PHONY: all clean dependents
